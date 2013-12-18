@@ -63,13 +63,13 @@ function check_service_last_maintenance_result($security_services_id) {
 
 	foreach($audit_list as $audit_item) {
 		# i just care for what it didnt pass
-		if($audit_item[security_services_maintenance_result] != "2") {
+		if($audit_item['security_services_maintenance_result'] != "2") {
 			# here i should have a non audit pass... 
 			# is it previous to this current date?
-			if ($audit_item[security_services_maintenance_planned_year] < $this_year) {
+			if ($audit_item['security_services_maintenance_planned_year'] < $this_year) {
 				# this is for sure a non-compliance from previous years
 				return;
-			} elseif ($audit_item[security_services_maintenance_planned_year] == $this_year && $audit_item[security_services_maintenance_calendar_id] < $this_month) {
+			} elseif ($audit_item['security_services_maintenance_planned_year'] == $this_year && $audit_item['security_services_maintenance_calendar_id'] < $this_month) {
 				# this is for sure a non-compliance from this month
 				return;
 			}
@@ -88,7 +88,7 @@ function add_security_services_maintenance_v2($security_services_id) {
 	
 	# first i need to know if this service is valid
 	$service_information = lookup_security_services("security_services_id", $security_services_id); 
-	if (empty($service_information[security_services_id])) {
+	if (empty($service_information['security_services_id'])) {
 		# echo "DEBUG: Not a valid service<br>";
 		return 1;
 	}
@@ -109,7 +109,7 @@ function add_security_services_maintenance_v2($security_services_id) {
 	if (!count($service_created_maintenance_list)) {
 		# echo "DEBUG: tenes que crear audits papa<br>";
 		foreach($service_planned_audits_list as $planned_audit) {
-			$audit_id = real_add_security_services_maintenance($service_information[security_services_id], $planned_audit[security_services_maintenance_calendar_id], $this_year, $service_information[security_services_regular_maintenance]);
+			$audit_id = real_add_security_services_maintenance($service_information['security_services_id'], $planned_audit['security_services_maintenance_calendar_id'], $this_year, $service_information['security_services_regular_maintenance']);
 			add_system_records("security_services","security_services_maintenance_edit",$audit_id,"SYSTEM","Insert","");
 		}
 		return;

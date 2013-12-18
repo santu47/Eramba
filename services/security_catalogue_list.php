@@ -81,7 +81,7 @@
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
-		);	
+        );
 		update_security_services($security_services_update,$security_services_id);
 		add_system_records("security_services","security_catalogue_edit","$security_services_id",$_SESSION['logged_user_id'],"Update","");
 	
@@ -140,7 +140,7 @@
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
-		);	
+		);
 		$security_services_id = add_security_services($security_services_update);
 		# when inserting security catalogues i need to look at the asociated reviews (audit)
 		# add_security_services_audit_v2($security_service_id);	
@@ -338,7 +338,7 @@ echo "								<td class=\"left\">$security_services_item[security_services_audit
 
 echo "								<td class=\"center\">";
 	foreach($months_list as $months) {
-		$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months[security_services_audit_calendar_id]); 
+		$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months['security_services_audit_calendar_id']);
 		echo "$month_name[security_services_audit_calendar_name] "; 
 	}
 
@@ -374,7 +374,7 @@ echo "								<td class=\"center\">";
 $maintenance_months_list = list_security_services_catalogue_maintenance_calendar_join(" WHERE security_service_catalogue_id = \"$security_services_item[security_services_id]\"");	
 
 foreach($maintenance_months_list as $maintenance_months_item) {
-	$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$maintenance_months_item[security_services_maintenance_calendar_id]); 
+	$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$maintenance_months_item['security_services_maintenance_calendar_id']);
 	echo "$month_name[security_services_audit_calendar_name] "; 
 }
 

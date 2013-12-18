@@ -358,7 +358,7 @@ date_default_timezone_set('America/Los_Angeles');
 		$control_audit_random_day_string = date("Y-m-d", $control_audit_random_time);
 		# debug
 		# echo "New Random Day: $control_audit_random_day_string vs $control_audit_item[security_services_audit_calendar_id]<br>";
-		$tmp_array = array(control_id => $control_audit_item[security_service_catalogue_id], day => $control_audit_random_day_string);
+		$tmp_array = array('control_id' => $control_audit_item['security_service_catalogue_id'], 'day' => $control_audit_random_day_string);
 		array_push($control_audit_updated,$tmp_array);
 		unset($tmp_array);
 	}
@@ -373,7 +373,7 @@ date_default_timezone_set('America/Los_Angeles');
 		$control_maintenance_random_day_string = date("Y-m-d", $control_maintenance_random_time);
 		# debug
 		# echo "New Random Day: $control_maintenance_random_day_string vs $control_maintenance_item[security_services_maintenance_calendar_id]<br>";
-		$tmp_array = array(control_id => $control_maintenance_item[security_service_catalogue_id], day => $control_maintenance_random_day_string);
+		$tmp_array = array('control_id' => $control_maintenance_item['security_service_catalogue_id'], 'day' => $control_maintenance_random_day_string);
 		array_push($control_maintenance_updated,$tmp_array);
 		unset($tmp_array);
 	}
