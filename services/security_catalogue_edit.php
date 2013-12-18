@@ -20,14 +20,14 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$security_services_id= isset( $_GET["security_services_id"] ) ? $_GET["security_services_id"] : $_GET["security_catalogue_id"];
+	$security_services_id= isset( $_GET["security_services_id"] ) ? $_GET["security_services_id"] :null;
 	
 	$base_url_list = build_base_url($section,"security_catalogue_list");
 	$base_url_edit = build_base_url($section,"security_catalogue_edit");
 
 	if (is_numeric($security_services_id)) {
 		$security_services_item = lookup_security_services("security_services_id",$security_services_id);
-	}
+	}else{$security_services_item=null;}
 
 ?>
 
