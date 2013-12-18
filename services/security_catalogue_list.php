@@ -269,21 +269,21 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 	foreach($security_services_list as $security_services_item) {
 	
 	# i use this to check if the control has audit failures and put it as a warning
-	if ( check_service_last_audit_result($security_services_item[security_services_id]) ) {
+	if ( check_service_last_audit_result($security_services_item['security_services_id']) ) {
 		$warning_audit = "";
 	} else {
 		$warning_audit = " - (Warning: Audit Issues)";
 	}
 
 	# i need to check if the service is actually being used or not
-	if ( service_in_use($security_services_item[security_services_id]) ) {
+	if ( service_in_use($security_services_item['security_services_id']) ) {
 		$warning_not_in_use= " - (Warning: Control not in use!)";
 	} else {
 		$warning_not_in_use= "";
 	} 
 
-	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	
-	$classification_name = lookup_security_services_classification("security_services_classification_id", $security_services_item[security_services_classification_id]);	
+	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item['security_services_status']);
+	$classification_name = lookup_security_services_classification("security_services_classification_id", $security_services_item['security_services_classification_id']);
 
 echo "			<li>";
 echo "				<div class=\"header\">";
@@ -344,7 +344,7 @@ echo "								<td class=\"center\">";
 
 echo "</td>";
 	#if ( check_service_last_maintenance_result($security_services_item[security_services_id]) ) {
-	if ( check_service_last_audit_result($security_services_item[security_services_id]) ) {
+	if ( check_service_last_audit_result($security_services_item['security_services_id']) ) {
 		$audit_result = "<a href=\"$base_url_audit_report_list&service_id=$security_services_item[security_services_id]\">Ok</a>";
 	} else {
 		$audit_result = "<a href=\"$base_url_audit_report_list&service_id=$security_services_item[security_services_id]\">Not Ok</a>";
@@ -365,7 +365,7 @@ echo "							</tr>";
 echo "							<tr>";
 echo "								<td class=\"center\">";
 
-		echo "".substr($security_services_item[security_services_regular_maintenance],0,100)."...";
+		echo "".substr($security_services_item['security_services_regular_maintenance'],0,100)."...";
 
 echo "</td>";
 
@@ -380,7 +380,7 @@ foreach($maintenance_months_list as $maintenance_months_item) {
 
 echo "</td>";
 
-		if ( check_service_last_maintenance_result($security_services_item[security_services_id]) ) {
+		if ( check_service_last_maintenance_result($security_services_item['security_services_id']) ) {
 			$audit_result = "<a href=\"$base_url_maintenance_report_list&service_id=$security_services_item[security_services_id]\">Ok</a>";
 		} else {
 			$audit_result = "<a href=\"$base_url_maintenance_report_list&service_id=$security_services_item[security_services_id]\">Not Ok</a>";

@@ -90,7 +90,7 @@ echo "						<textarea class=\"\" id=\"\" name=\"security_services_documentation_
 						<label for="legalType">Audit Metrics</label>
 						<span class="description">What needs to be measured in order to determine if the service is doing what it should</span>
 <?
-				if (empty($security_services_item[security_services_audit_metric])) { 
+				if (empty($security_services_item['security_services_audit_metric'])) {
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">Describe the metric</textarea>";
 				} else {
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">$security_services_item[security_services_audit_metric]</textarea>";
@@ -102,7 +102,7 @@ echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_metric\">$
 
 <?
 
-				if (empty($security_services_item[security_services_audit_metric])) { 
+				if (empty($security_services_item['security_services_audit_metric'])) {
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_success_criteria\">Describe the metric success criteria</textarea>";
 				} else {
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_audit_success_criteria\">$security_services_item[security_services_audit_success_criteria]</textarea>";
@@ -144,7 +144,7 @@ echo "				<textarea class=\"\" id=\"\" name=\"security_services_regular_maintena
 		<span class="description">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (OPEX).</span>
 
 <?
-				if (empty($security_services_item[security_services_cost_opex])) { 
+				if (empty($security_services_item['security_services_cost_opex'])) {
 echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_opex\" value=\"\"/>";
 				} else {
 echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_opex\" value=\"$security_services_item[security_services_cost_opex]\"/>";
@@ -153,7 +153,7 @@ echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_opex\" v
 echo "		<label for=\"name\">Service Cost (CAPEX)</label>";
 echo "		<span class=\"description\">For those of you who must keep budgets tidy, it's important to keep as clear as possible how much effort is required to operate the service in financial (CAPEX)</span>";
 
-				if (empty($security_services_item[security_services_cost_capex])) { 
+				if (empty($security_services_item['security_services_cost_capex'])) {
 echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_capex\" value=\"\"/>";
 				} else {
 echo "				<textarea class=\"\" id=\"\" name=\"security_services_cost_capex\">$security_services_item[security_services_cost_capex]</textarea>";
@@ -164,7 +164,7 @@ echo "		<span class=\"description\">How many days of your resources this control
 
 
 
-				if (empty($security_services_item[security_services_cost_operational_resource])) { 
+				if (empty($security_services_item['security_services_cost_operational_resource'])) {
 echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_operational_resource\" value=\"\"/>";
 				} else {
 echo "				<input type=\"text\" class=\"\" name=\"security_services_cost_operational_resource\" value=\"$security_services_item[security_services_cost_operational_resource]\"/>";
