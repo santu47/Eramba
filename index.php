@@ -17,11 +17,11 @@ $logged_user_data = runSmallQuery(
 );
 
 if ( isset( $_GET['download_export'] )  ) {
-	$download_export( $_GET['download_export'] );
+	download_export( $_GET['download_export'] );
 }
 
 if ( isset( $_GET['download_attachment'] )  ) {
-	$download_attachment( $_GET['download_attachment'] );
+	download_attachment( $_GET['download_attachment'] );
 }
 
 include_once("header.php");
