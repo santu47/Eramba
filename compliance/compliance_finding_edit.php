@@ -25,7 +25,7 @@
 ?>
 
 
-	<section id="content-wrapper">
+	<section id="content-wrapper"></section>
 		<h3>Edit or Create an Audit Finding </h3>
 		<span class="description">Use this form to create or edit an audit finding</span>
 		<div class="tab-wrapper"> 

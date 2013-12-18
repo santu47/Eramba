@@ -120,7 +120,7 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=compliance_audit_title\">Audit Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_audit_title\">Audit Date</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_audit_date\">Compliance Package</a></th>";
-echo "					<th><center><a href=\"$base_url&sort=compliance_audit_expiration\">Audit Findings</a></th>";
+echo "					<th><center><a href=\"$base_url_list&sort=compliance_audit_expiration\">Audit Findings</a></th>";
 ?>
 				</tr>
 			</thead>
@@ -142,8 +142,8 @@ echo "					<th><center><a href=\"$base_url&sort=compliance_audit_expiration\">Au
 
 	foreach($compliance_audit_list as $compliance_audit_item) {
 
-	if ($compliance_audit_item[compliance_audit_package_id] == "-1") {
-		$compliance_audit_item[compliance_audit_package_id] = "Not defined";
+	if ($compliance_audit_item['compliance_audit_package_id'] == "-1") {
+		$compliance_audit_item['compliance_audit_package_id'] = "Not defined";
 	}
 
 echo "				<tr class=\"even\">";
@@ -162,7 +162,7 @@ echo "						</div>";
 echo "					</td>";
 echo "					<td>$compliance_audit_item[compliance_audit_date]</td>";
 
-	$compliance_package_name = lookup_tp("tp_id",$compliance_audit_item[compliance_audit_package_id]); 
+	$compliance_package_name = lookup_tp("tp_id",$compliance_audit_item['compliance_audit_package_id']);
 
 echo "					<td>$compliance_package_name[tp_name]</td>";
 echo "							<td class=\"action-cell\">

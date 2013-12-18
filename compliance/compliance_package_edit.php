@@ -7,14 +7,14 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$compliance_package_id = $_GET["compliance_package_id"];
-	$compliance_package_tp_id = $_GET["compliance_package_tp_id"];
+	$compliance_package_id = isset($_GET["compliance_package_id"])?$_GET["compliance_package_id"]:null;
+	$compliance_package_tp_id = isset($_GET["compliance_package_tp_id"])?$_GET["compliance_package_tp_id"]:null;
 	
 	$base_url_list  = build_base_url($section,"compliance_package_list");
 
 	if (is_numeric($compliance_package_id)) {
 		$compliance_package_item = lookup_compliance_package("compliance_package_id",$compliance_package_id);
-	}
+	}else{$compliance_package_item =null;}
 	
 ?>
 
