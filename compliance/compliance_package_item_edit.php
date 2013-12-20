@@ -47,11 +47,11 @@ echo "					<form name=\"compliance_package_edit\" method=\"GET\" action=\"$base_
 <? echo "						<input disabled type=\"text\" class=\"\" name=\"compliance_package_name\" id=\"\" value=\"$compliance_package_item[compliance_package_name]\"/>";?>
 						<label for="name">Compliance Package Item Id</label>
 						<span class="description"></span>
-<? echo "						<input type=\"text\" name=\"compliance_package_item_original_id\" id=\"\" value=\"$compliance_package_item_item[compliance_package_item_original_id]\"/>";?>
+<? echo "						<input type=\"text\" name=\"compliance_package_item_original_id\" id=\"\" value=\"$compliance_package_item[compliance_package_item_original_id]\"/>";?>
 						
 						<label for="name">Item Name</label>
 						<span class="description"></span>
-<? echo "						<input type=\"text\" class=\"\" name=\"compliance_package_item_name\" id=\"\" value=\"$compliance_package_item_item[compliance_package_item_name]\"/>";?>
+<? echo "						<input type=\"text\" class=\"\" name=\"compliance_package_item_name\" id=\"\" value=\"$compliance_package_item[compliance_package_item_name]\"/>";?>
 						
 						<label for="description">Description</label>
 						<span class="description"></span>

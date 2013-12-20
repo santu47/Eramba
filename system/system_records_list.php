@@ -6,11 +6,12 @@
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$sort = isset ($_GET["sort"]) ? $_GET["sort"]:null;
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
+	$section = isset($_GET["section"]) ? $_GET["section"]:null;
+	$subsection = isset($_GET["subsection"]) ? $_GET["subsection"]:null;
 	$action = isset ($_GET["action"]) ? $_GET["action"]:null;
-	
-	$base_url_list = build_base_url($section,"system_records_list");
+    $specific_query = isset ($_GET["specific_query"]) ? $_GET["specific_query"]:null;
+
+$base_url_list = build_base_url($section,"system_records_list");
 	$base_url_edit = build_base_url($section,"system_records_edit");
 	
 	# local variables - YOU MUST ADJUST THIS! 
@@ -99,7 +100,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $page_offset = ($page-1)*$page_limit;
 
 	if ($sort == "system_records_description" OR $sort == "system_records_section" OR $sort == "system_records_action" OR $sort == "system_records_author") {
-	$system_records_list = list_system_records(" $speficic_query ORDER by $sort LIMIT {$page_limit} OFFSET {$page_offset}");
+	$system_records_list = list_system_records(" $specific_query ORDER by $sort LIMIT {$page_limit} OFFSET {$page_offset}");
 	} else {
 	$system_records_list = list_system_records(" $specific_query ORDER by system_records_date DESC LIMIT {$page_limit} OFFSET {$page_offset}");
 	}

@@ -8,7 +8,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$system_group_role_id = isset( $_GET["system_group_role_id"] ) ? $_GET["system_group_role_id"] : $_GET["system_roles_id"];
+	$system_group_role_id = isset( $_GET["system_group_role_id"] ) ? $_GET["system_group_role_id"] : 1;
 	
 	$base_url_list = build_base_url($section,"system_roles_list");
 

@@ -9,7 +9,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$system_users_id = isset( $_GET["system_users_id"] ) ? $_GET["system_users_id"] : $_GET["system_authorization_id"];
+	$system_users_id = isset( $_GET["system_users_id"] ) ? $_GET["system_users_id"] : 1;
 	
 	$base_url_list = build_base_url($section,"system_authorization_list");
 
@@ -53,7 +53,7 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 
 <?
 						
-if ($item[system_users_id] != "1") { 
+if ($item['system_users_id'] != "1") {
 
 	echo "	<label for=\"legalType\">Group Role</label>";
 	echo "	<span class=\"description\">Select the access Group Role this user requires</span>";

@@ -170,7 +170,7 @@ echo "					<th>Group</a></th>";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 	#echo "$_SESSION[logged_user_id]";
 
-	$logged_user = $_SESSION[logged_user_id];
+	$logged_user = $_SESSION[$logged_user_id];
 	# i must have a logged user .. if i dont, something is weird and i should stop.
 	# if the logged user is admin, i can see all users
 	if ($logged_user == "1") {
@@ -197,7 +197,7 @@ echo "						</div>";
 echo "					</td>";
 echo "					<td>$system_users_item[system_users_name]</td>";
 echo "					<td>$system_users_item[system_users_surname]</td>";
-					$group_role_id = lookup_system_group_role("system_group_role_id",$system_users_item[system_users_group_role_id]);
+					$group_role_id = lookup_system_group_role("system_group_role_id",$system_users_item['system_users_group_role_id']);
 echo "					<td>$group_role_id[system_group_role_name]</td>";
 echo "				</tr>";
 	}
