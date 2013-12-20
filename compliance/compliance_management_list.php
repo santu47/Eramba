@@ -4,8 +4,8 @@
 	include_once("lib/compliance_package_lib.php");
     include_once("lib/tp_lib.php");
 
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
+	$section = isset($_GET["section"])?$_GET["section"]:null;
+	$subsection = isset($_GET["subsection"])?$_GET["subsection"]:null;
 	$action = isset($_GET["action"])?$_GET["action"]:null;
 	
 	$base_url_step_two = build_base_url($section,"compliance_management_step_two");
@@ -76,7 +76,7 @@ echo "						<div class=\"cell-actions\">";
 echo "							<a href=\"$base_url_step_two&action=start_compliance_management&tp_id=$package_name[tp_id]\">Analyse</a> ";
 echo "						</div>";
 echo "					</td>";
-echo "					<td>".round($strategy_response[0]*100,2)." %</td>";
+echo "					<td>".round(substr($strategy_response[0]*100,2))." %</td>";
 echo "					<td>".round($strategy_response[1]*100,2)." %</td>";
 echo "					<td>$no_controls %</td>";
 echo "					<td>$failed_controls %</td>";

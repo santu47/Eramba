@@ -13,10 +13,10 @@
 	include_once("lib/security_services_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
-	$sort = $_GET["sort"];
-	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
+	$sort = isset($_GET["sort"])?$_GET["sort"]:null;
+	$section = isset($_GET["section"])?$_GET["section"]:null;
+	$subsection =isset($_GET["subsection"])?$_GET["subsection"]:null;
+	$action = isset($_GET["action"])?$_GET["action"]:null;
 	
 	$base_url_list  = build_base_url($section,"compliance_management_step_two");
 	$base_url_edit  = build_base_url($section,"compliance_management_edit");
@@ -24,19 +24,18 @@
 	$compliance_exception_url = build_base_url("compliance","compliance_exception_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
-	$tp_id = $_GET["tp_id"];
-	$compliance_management_item_id = $_GET["compliance_management_item_id"];
-	$compliance_management_id = $_GET["compliance_management_id"];
-	$compliance_management_response_id = $_GET["compliance_management_response_id"];
-	$compliance_management_status_id = $_GET["compliance_management_status_id"];
-	$compliance_management_exception_id = $_GET["compliance_management_exception_id"];
-	$compliance_security_services_join_security_services_id = $_GET["compliance_security_services_join_security_services_id"];
+	$tp_id = isset($_GET["tp_id"])?$_GET["tp_id"]:null;
+	$compliance_management_item_id =isset($_GET["compliance_management_item_id"])?$_GET["compliance_management_item_id"]:null;
+	$compliance_management_id = isset($_GET["compliance_management_id"])?$_GET["compliance_management_id"]:null;
+	$compliance_management_response_id =isset($_GET["compliance_management_response_id"])?$_GET["compliance_management_response_id"]:null;
+	$compliance_management_status_id = isset($_GET["compliance_management_status_id"])?$_GET["compliance_management_status_id"]:null;
+	$compliance_management_exception_id = isset($_GET["compliance_management_exception_id"])?$_GET["compliance_management_exception_id"]:null;
+	$compliance_security_services_join_security_services_id =isset($_GET["compliance_security_services_join_security_services_id"])?$_GET["compliance_security_services_join_security_services_id"]:null;
 
 	#actions .. edit, update or disable - YOU MUST ADJUST THIS!
 	if ($action == "update" & is_numeric($compliance_management_id)) {
 		$compliance_management_update = array(
 			'compliance_management_response_id' => $compliance_management_response_id,
-			'compliance_management_status_id' => $compliance_management_status_id,
 			'compliance_management_status_id' => $compliance_management_status_id,
 			'compliance_management_exception_id' => $compliance_management_exception_id
 		);	
@@ -104,7 +103,7 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
-echo "					<li><a href=\"downloads/compliance_management_export.csv\">Dowload</a></li>";
+echo "					<li><a href=\"downloads/compliance_management_export.csv\">Download</a></li>";
 } else { 
 echo "					<li><a href=\"$base_url_list&action=csv&tp_id=$tp_id\">Export</a></li>";
 }
@@ -120,7 +119,7 @@ echo "					<li><a href=\"$base_url_list&action=csv&tp_id=$tp_id\">Export</a></li
 	foreach($compliance_package_list as $compliance_package_item) {
 
 echo "<ul id=\"accordion\">\n";
-$short_description = "".substr($compliance_package_item[compliance_package_description],0,60)."...";
+$short_description = "".substr($compliance_package_item['compliance_package_description'],0,60)."...";
 echo "<br><h4>$compliance_package_item[compliance_package_original_id] - $compliance_package_item[compliance_package_name] ($short_description)</h4>\n";
 //echo "<br class=\"clear\"/>\n";
 
@@ -144,9 +143,9 @@ echo "			<tbody>\n";
 		foreach($compliance_package_item_list as $compliance_package_item_item) {
 	
 		# load the ocmpliance_management_item data
-		$compliance_management_item = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item[compliance_package_item_id]);
-		$lookup_response_id = lookup_compliance_response_strategy("compliance_response_strategy_id",$compliance_management_item[compliance_management_response_id]);
-		$lookup_status_id = lookup_compliance_status("compliance_status_id",$compliance_management_item[compliance_management_status_id]);
+		$compliance_management_item = lookup_compliance_management("compliance_management_item_id", $compliance_package_item_item['compliance_package_item_id']);
+		$lookup_response_id = lookup_compliance_response_strategy("compliance_response_strategy_id",$compliance_management_item['compliance_management_response_id']);
+		$lookup_status_id = lookup_compliance_status("compliance_status_id",$compliance_management_item['compliance_management_status_id']);
 		$applicable_security_services = array();
 		$applicable_security_services = list_compliance_item_security_services_join(" WHERE compliance_security_services_join_compliance_id = \"$compliance_package_item_item[compliance_package_item_id]\"");	
 
@@ -167,13 +166,13 @@ echo "			<td>$compliance_package_item_item[compliance_package_item_description]<
 echo "			<td>$lookup_response_id[compliance_response_strategy_name]</td>\n";
 echo "			<td>\n";
 			foreach($applicable_security_services as $service_item) {
-				$security_services_details = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);	
-				if ( security_service_check($service_item[compliance_security_services_join_security_services_id]) ) {
+				$security_services_details = lookup_security_services("security_services_id",$service_item['compliance_security_services_join_security_services_id']);
+				if ( security_service_check($service_item['compliance_security_services_join_security_services_id']) ) {
 					$warning = "(Audit Issues)";
 				}
 
-				$tmp = lookup_security_services("security_services_id",$service_item[compliance_security_services_join_security_services_id]);
-				if ($tmp[security_services_status] != "4") {  
+				$tmp = lookup_security_services("security_services_id",$service_item['compliance_security_services_join_security_services_id']);
+				if ($tmp['security_services_status'] != "4") {
 					$warning = "(Not in Production)";
 				}
 				unset($tmp);

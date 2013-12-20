@@ -1,7 +1,7 @@
 <?
 
 # WARNING! This is a TEMPLATE
-# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_management/compliance_management/ - SAMEPLE
+# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/compliance_management/compliance_management/ - SAMPLE
 
 include_once("mysql_lib.php");
 include_once("compliance_item_security_service_join_lib.php");
@@ -164,8 +164,9 @@ function compliance_rate_missing_controls($third_party_id) {
 	}
 
 	return round($math,2);
-	
+
 }
+
 
 function list_compliance_management($arguments) {
 	# MUST EDIT
@@ -319,7 +320,7 @@ function export_compliance_management_csv($tp_id) {
 			}
 			# this is necesry to finish the column hwere the sec controls are listed	
 			fwrite($handler,",");
-			
+
 			# this sucks!!! i need to use implode or something a bit simpler!
 			foreach($applicable_security_services as $service_item) {
 				if (security_service_check($service_item[compliance_security_services_join_security_services_id])) {

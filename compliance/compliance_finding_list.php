@@ -118,7 +118,7 @@ echo "					<td>".substr($tmp,0,60)."</td>";
 echo "					<td>".substr($compliance_finding_item[compliance_finding_description],0,60)."...</td>";
 echo "					<td>$compliance_finding_item[compliance_finding_deadline]</td>";
 
-	$status = lookup_compliance_finding_status("compliance_finding_status_id", $compliance_finding_item[compliance_finding_status]); 
+	$status = lookup_compliance_finding_status("compliance_finding_status_id", $compliance_finding_item[compliance_finding_status]);
 echo "					<td>$status[compliance_finding_status_name]</td>";
 echo "				</tr>";
 	}
