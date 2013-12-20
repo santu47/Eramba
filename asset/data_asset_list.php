@@ -133,7 +133,7 @@ if ($action == "csv") {
 		if(count($selected_services_list) > 0) {
 			foreach($selected_services_list as $selected_services_item) {
 				if ( security_service_check($selected_services_item[data_asset_security_services_join_security_services_id]) ) {
-					$warning_wrong_service = " - (Warning - Controls used here are faulty!) ";
+					$warning_wrong_service = "(Warning - Controls used here are faulty!)";
 				}
 				
 				$tmp = lookup_security_services("security_services_id",$selected_services_item[data_asset_security_services_join_security_services_id]);
@@ -142,7 +142,7 @@ if ($action == "csv") {
 				}
 			}
 		} else {
-			$warning_missing_service = " - (Warning - Your data analisys might be missing some controls!) ";
+			$warning_missing_service = "(Warning - Your data analisys might be missing some controls!)";
 		}
 
 	}

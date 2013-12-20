@@ -1,5 +1,4 @@
 <?
-
 	include_once("lib/tp_lib.php");
 	include_once("lib/tp_type_lib.php");
 	include_once("lib/site_lib.php");
@@ -7,7 +6,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$tp_id = $_GET["tp_id"];
+	$tp_id = isset($_GET["tp_id"]);
 	
 	$base_url_list = build_base_url($section,"tp_list");
 	$base_url_edit = build_base_url($section,"tp_edit");
@@ -15,9 +14,11 @@
 	if (is_numeric($tp_id)) {
 		$tp_item = lookup_tp("tp_id",$tp_id);
 	}
+    else{
+        $tp_item=null;
+    }
 
 ?>
-
 
 	<section id="content-wrapper">
 		<h3>Edit or Create a Third Party</h3>
@@ -33,7 +34,7 @@
 			<div class="tab-content">
 				<div class="tab" id="tab1">
 <?
-echo "					<form name=\"tp_edit\" method=\"GET\" action=\"$base_url\">";
+echo "					<form name=\"tp_edit\" method=\"GET\" action=\"$base_url_edit\">";
 ?>
 						<label for="name">Name</label>
 						<span class="description">Name the third party. Examples: Provider X, Customers, PCI-DSS, etc. </span>

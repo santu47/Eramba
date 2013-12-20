@@ -7,14 +7,20 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$asset_label_id = $_GET["asset_label_id"];
+    $asset_label_id=0;
+    if(isset($_GET["asset_label_id"])){
+        $asset_label_id = $_GET["asset_label_id"];
+    }
+	#$asset_label_id = $_GET["asset_label_id"];
 	
 	$base_url_list = build_base_url($section,"asset_label_list");
 
 	if (is_numeric($asset_label_id)) {
 		$asset_label_item = lookup_asset_label("asset_label_id",$asset_label_id);
 	}
-
+    else{
+        $asset_label_item=null;
+    }
 ?>
 
 	<section id="content-wrapper">

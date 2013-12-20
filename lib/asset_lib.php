@@ -6,6 +6,7 @@
 include_once("mysql_lib.php");
 include_once("data_asset_lib.php");
 include_once("asset_label_lib.php");
+error_reporting(0);
 
 function list_asset($arguments) {
 	# MUST EDIT
@@ -183,7 +184,7 @@ function export_asset_csv() {
 		$asset_classification_list = list_asset_classification_distinct();
 		$classification_values=array();
 		foreach($asset_classification_list as $asset_classification_item) {
-			$value = pre_selected_asset_classification_values($asset_classification_item[asset_classification_type], $asset_item[asset_id]);	
+			$value = pre_selected_asset_classification_values($asset_classification_item[asset_classification_type], $asset_item[asset_id]);
 			$name = lookup_asset_classification("asset_classification_id", $value);
 			array_push($classification_values, $name[asset_classification_name]);
 		}

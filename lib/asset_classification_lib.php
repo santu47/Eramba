@@ -4,13 +4,14 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/asset_classification/asset_classification/ - SAMEPLE
 
 include_once("mysql_lib.php");
+include_once("configuration.inc");
 
 function pre_selected_asset_classification_values($asset_classification_type, $asset_id) {
 
 	# i need to know all classification id's with the "asset_classification_type" value
 	# i need to know all classifications made with the asset $asset_id
 	# i need to mix those two
-	
+
 	# i need to know all classification id's with the "asset_classification_type" value
 	$sql = "SELECT
 		asset_classification_id
@@ -21,7 +22,7 @@ function pre_selected_asset_classification_values($asset_classification_type, $a
 		AND
 		asset_classification_disabled = \"0\"
 		";
-	# echo "sql1: $sql<br>";
+	 echo "sql1: $sql<br>";
 	$classification_id = runQuery($sql);
 
 	# i need to know all classifications made with the asset $asset_id
@@ -42,7 +43,7 @@ function pre_selected_asset_classification_values($asset_classification_type, $a
 			if ($classification_item[asset_classification_id] == $asset_classification_item[asset_classification_join_asset_classification_id]) {
 				return $asset_classification_item[asset_classification_join_asset_classification_id];
 			}
-		}	
+		}
 	}
 }
 
@@ -69,14 +70,14 @@ function add_asset_classification_join($asset_classification_join_asset_id, $ass
 	if (!is_numeric($asset_classification_join_asset_id)) {
 		return;
 	}
-	
+
 	$sql = "INSERT INTO
 		asset_classification_join
 		VALUES (
 		\"$asset_classification_join_asset_id\",
 		\"$asset_classification_join_asset_classification_id\"
 		)
-		";	
+		";
 
 	$result = runUpdateQuery($sql);
 	return $result;
@@ -88,14 +89,14 @@ function delete_asset_classification_join($asset_id) {
 	if (!is_numeric($asset_id)) {
 		return;
 	}
-	
+
 	$sql = "DELETE
 		from
 		asset_classification_join
 		WHERE
 		asset_classification_join_asset_id = \"$asset_id\"
 		";
-	
+
 	$result = runUpdateQuery($sql);
 	return $result;
 }
@@ -111,7 +112,7 @@ function list_asset_classification_distinct() {
 		asset_classification_disabled = \"0\"
 		LIMIT
 		5
-		"; 
+		";
 	$results = runQuery($sql);
 	return $results;
 }
@@ -134,10 +135,10 @@ function add_asset_classification($asset_classification_data) {
 		\"$asset_classification_data[asset_classification_value]\",
 		\"0\"
 		)
-		";	
+		";
 	$result = runUpdateQuery($sql);
 	return $result;
-	
+
 }
 
 function update_asset_classification($asset_classification_data, $asset_classification_id) {
@@ -149,7 +150,7 @@ function update_asset_classification($asset_classification_data, $asset_classifi
 		asset_classification_value=\"$asset_classification_data[asset_classification_value]\"
 		WHERE
 		asset_classification_id=\"$asset_classification_id\"
-		";	
+		";
 	$result = runUpdateQuery($sql);
 	return $result;
 }
@@ -160,7 +161,7 @@ function lookup_asset_classification($search_parameter, $item_id) {
 	}
 
 	# MUST EDIT
-	$sql = "SELECT * from asset_classification_tbl WHERE $search_parameter = \"$item_id\""; 
+	$sql = "SELECT * from asset_classification_tbl WHERE $search_parameter = \"$item_id\"";
 	$result = runSmallQuery($sql);
 	return $result;
 }
@@ -180,19 +181,19 @@ function list_drop_menu_asset_classification($pre_selected_items='', $order_clau
 	$results = runQuery($sql);
 
 	foreach($results as $results_item) {
-		if (is_array($pre_selected_items)) { 
+		if (is_array($pre_selected_items)) {
 			$match = NULL;
 			foreach($pre_selected_items as $preselected) {
 				# MUST EDIT
 				if ($results_item[asset_classification_id] == $preselected) {
 					echo "<option selected=\"selected\" value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n";
 					$match = 1;
-				} 
+				}
 			}
 
 			# MUST EDIT
-			if (!$match) { 
-				echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n"; 
+			if (!$match) {
+				echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n";
 			}
 
 		} elseif ($pre_selected_items) {
@@ -201,15 +202,15 @@ function list_drop_menu_asset_classification($pre_selected_items='', $order_clau
 			if ($results_item[asset_classification_id] == $pre_selected_items) {
 				echo "<option selected=\"selected\" value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n";
 				$match = 1;
-			} 
+			}
 
 			# MUST EDIT
-			if (!$match) { 
-				echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n"; 
+			if (!$match) {
+				echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n";
 			}
 		} else {
 			# MUST EDIT
-			echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n"; 
+			echo "<option value=\"$results_item[asset_classification_id]\">$results_item[asset_classification_name]</option>\n";
 		}
 	}
 
@@ -220,7 +221,7 @@ function disable_asset_classification($item_id) {
 		return;
 	}
 	# MUST EDIT
-	$sql = "UPDATE asset_classification_tbl SET asset_classification_disabled=\"1\" WHERE asset_classification_id = \"$item_id\""; 
+	$sql = "UPDATE asset_classification_tbl SET asset_classification_disabled=\"1\" WHERE asset_classification_id = \"$item_id\"";
 	$result = runUpdateQuery($sql);
 	return;
 }
@@ -230,20 +231,19 @@ function export_asset_classification_csv() {
 	# this will dump the table asset_classification_tbl on CSV format
 	$sql = "SELECT * from asset_classification_tbl";
 	$result = runQuery($sql);
-	
+
 	# open file
-	$export_file = "downloads/asset_classification_export.csv";
-	$handler = fopen($export_file, 'w');
-	
-	fwrite($handler, "asset_classification_id,asset_classification_name,asset_classification_description,asset_classification_type, asset_classification_value, asset_classification_disabled\n");
-	foreach($result as $line) {
+
+   $export_file = "downloads/asset_classification_export.csv";
+  # $export_file = "asset_classification_export.csv";
+   $handler = fopen($export_file, 'w');
+	 #error_reporting(0);
+    fwrite($handler, "asset_classification_id,asset_classification_name,asset_classification_criteria,asset_classification_type, asset_classification_value, asset_classification_disabled\n");
+             foreach($result as $line) {
 		fwrite($handler,"$line[asset_classification_id],$line[asset_classification_name],$line[asset_classification_criteria],$line[asset_classification_type], $line[asset_classification_value],$line[asset_classification_disabled]\n");
 	}
-	
-	fclose($handler);
-
-}
-
+    fclose($handler);
+   }
 ?>
 
 

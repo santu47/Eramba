@@ -12,8 +12,8 @@
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
-	$action = $_GET["action"];
-	$asset_id= $_GET["asset_id"];
+	$action = isset($_GET["action"]);
+	$asset_id= isset($_GET["asset_id"]);
 	
 	$base_url_edit = build_base_url($section,"asset_edit");
 	$base_url_list = build_base_url($section,"asset_list");
@@ -21,6 +21,10 @@
 	if (is_numeric($asset_id)) {
 		$asset_item = lookup_asset("asset_id",$asset_id);
 	}
+    else{
+    $asset_item = null;
+}
+
 
 ?>
 
@@ -123,7 +127,7 @@ echo "						<textarea id=\"\" name=\"asset_description\" class=\"filter-text\">$
 						<option value="-1">Select a User...</option>
 						<option value="0">Everyone!<option>
 <?
-						list_drop_menu_bu($asset_item[asset_user_id],"bu_name");	
+						list_drop_menu_bu($asset_item['asset_user_id'],"bu_name");
 ?>
 						</select>
 						<br>

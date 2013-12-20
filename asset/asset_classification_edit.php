@@ -7,7 +7,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$asset_classification_id = $_GET["asset_classification_id"];
+	$asset_classification_id = isset($_GET["asset_classification_id"]);
 	
 	$base_url_edit = build_base_url($section,"asset_classification_edit");
 	$base_url_list = build_base_url($section,"asset_classification_list");
@@ -15,6 +15,9 @@
 	if (is_numeric($asset_classification_id)) {
 		$asset_classification_item = lookup_asset_classification("asset_classification_id",$asset_classification_id);
 	}
+    else{
+        $asset_classification_item=null;
+    }
 
 ?>
 
@@ -43,7 +46,7 @@ echo "					<form name=\"asset_classification_edit\" method=\"GET\" action=\"$bas
 ?>
 						</select>
 						<span class="description">or name a new type (this option superseeds any previous selection):</span>
-<? echo "						<input type=\"text\" class=\"filter-text\" name=\"asset_classification_type_new\" id=\"asset_classification_criteria_new\" value=\"\"/>";?>
+<? echo "						<input type=\"text\" class=\"filter-text\" name=\"asset_classification_type_new\" id=\"asset_classification_criteria_new\" value=\"$asset_classification_item[asset_classification_type_new]\"/>";?>
 						<label for="name">Name</label>
 						<span class="description">You will need to create a name for your classification. Examples could be "High", "Low", etc.</span>
 <? echo "						<input type=\"text\" class=\"filter-text\" name=\"asset_classification_name\" id=\"asset_classification_name\" value=\"$asset_classification_item[asset_classification_name]\"/>";?>
