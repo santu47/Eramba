@@ -1,131 +1,99 @@
 <?
-	session_start();
-
-	include_once("lib/mysql_lib.php");
-	include_once("lib/system_security_lib.php");
-	include_once("lib/site_lib.php");
-	include_once("lib/security_services_dashboard_lib.php");
-	include_once("lib/organization_dashboard_lib.php");
-	include_once("lib/risk_dashboard_lib.php");
-	include_once("lib/system_records_lib.php");
-	include_once("lib/asset_dashboard_lib.php");
-	include_once("lib/compliance_dashboard_lib.php");
-	include_once("lib/security_operations_dashboard_lib.php");
-	include_once("lib/system_dashboard_lib.php");
-	include_once("lib/security_services_audit_lib.php");
-	include_once("lib/bcm_dashboard_lib.php");
-
-	$login_error=0;
-
-	if ( isset($_POST['login-submit']) ) {
-		$system_users_login = $_POST['login'];
-		$system_users_password = $_POST['password'];
-
-		if($user_id = authenticate_user_credentials($system_users_login, $system_users_password)) {
-			# echo "good credentials for $user_id";
-			$_SESSION['logged_user_id'] = $user_id; 
-
-			# make a record
-			add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","");
-
-			# everytime someone logs in the system, i need to make sure i add all the dashboard statistics
-			security_services_dashboard_data(NULL);
-			risk_dashboard_data(NULL);
-			asset_dashboard_data(NULL);
-			compliance_dashboard_data(NULL);
-			security_operations_dashboard_data(NULL);
-			system_dashboard_data(NULL);
-			organization_dashboard_data(NULL);
-			bcm_plans_dashboard_data(NULL);
-
-			# update new audits in case we are in a new year
-			new_year_audit_updates();
-	
-			header('Location: index.php');
-		} else {
-			# echo "wrong credentials";
-			add_system_records("system","system_authorization","$user_id","$system_users_login","Wrong Login","");
-			$login_error=1;	
-		} 
-	
-
-	}
-
-	$logged_user = isset( $_SESSION['logged_user_id'] ) ? true : false;
-
-	if ( $logged_user ) {
-		header('Location: index.php');
-	}
-
-
 ?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-	<title>eramba security manager</title>
-	<meta charset="UTF-8" />
-			
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	      
-	<meta name="author" content=""/>
-	<meta name="Copyright" content="" />
-	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta http-equiv="Pragma" content="no-cache" />
-	
-<?php
-echo "	<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>";
-echo "	<script type=\"text/javascript\" src=\"js/jquery-ui.min.js\"></script>";
-echo "	<script type=\"text/javascript\" src=\"js/admin.scripts.js\"></script>";
-echo "	<script type=\"text/javascript\" src=\"js/chosen.jquery.js\"></script>";
-echo "	<script type=\"text/javascript\" src=\"js/accordion.js\"></script>";
-echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/normalize.css\" />";
-echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\" />";
-echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
-echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
-?>
+    <title>eramba security manager</title>
+    <meta charset="UTF-8">
 
-	<link rel="stylesheet" href="css/jquery-ui.css" />
-	<script>
-	</script>
-	
-	
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta name="author" content="">
+    <meta name="Copyright" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="Pragma" content="no-cache">
+<?php
+echo"    <script type=\"text/javascript\" src=\"/js/jquery.min.js\"></script>";
+echo"    <script type=\"text/javascript\" src=\"/js/jquery-ui.min.js\"></script>";
+echo"    <script type=\"text/javascript\" src=\"/js/admin.scripts.js\"></script>";
+echo"    <script type=\"text/javascript\" src=\"/js/chosen.jquery.js\"></script>";
+echo"    <script type=\"text/javascript\" src=\"/js/accordion.js\"></script>";
+echo"    <script type=\"text/javascript\" src=\"/js/input-filters.js\"></script>";
+echo"    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/normalize.css\">";
+echo"    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">";
+echo"    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\">";
+echo"    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\">";
+echo"    <script type=\"text/javascript\" src=\"css/jsapi\"></script>";
+?>
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <script>
+    </script>
+
 
 </head>
 <body>
 
+<section id="header-wrapper">
+    <div id="header-inner"/>
+</section>
+<pre></pre>
 
-<? 
 
-	if ($login_error) {
-		error_message("Wrong Credentials", "A01");	
-	} else {
-		
-echo "	<div id=\"centerbox-page-wrapper\" class=\"login\">";
-echo "		<div id=\"centerbox-page-overlay\">";
-echo "		</div>";
-echo "		<img src=\"img/centerbox-login-top.png\" id=\"centerbox-login-top\" width=\"131\" height=\"47\" />";
-echo "		<div id=\"centerbox-page-content\">";
-echo "			<form id=\"login\" name=\"login\" method=\"POST\">";
-echo "				<div class=\"centerbox-entry\">";
-echo "					<label for=\"login\">Login</label>";
-echo "					<input type=\"text\" name=\"login\" id=\"login\" />";
-echo "				</div>";
-echo "				<div class=\"centerbox-entry\">";
-echo "					<label for=\"password\">Password</label>";
-echo "					<input type=\"password\" name=\"password\" id=\"password\" />";
-echo "				</div>";
-echo "				<div class=\"centerbox-entry\">";
-echo "					<input type=\"submit\" name=\"login-submit\" id=\"submit\" value=\"Sign in\" />";
-echo "				</div>";
-echo "				<div class=\"centerbox-entry\">";
-echo "					<p><a href=\"#\">Forgot password?</a><span> or </span><a href=\"#\">Create New</a></p>";
-echo "				</div>";
-echo "			</form>";
-echo "		</div>";
-echo "	</div>";
+<section id="content-wrapper">
+    <h3>Create a User Authorization for Your Company</h3>
+    <div class="tab-wrapper">
+        <ul class="tabs">
+            <li class="first active">
 
-	}
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab" id="tab">
+<?
+echo"                <form name=\"system_admin_add\" method=\"GET\" action=\"\">";
 ?>
+                    <label for="name">Name</label>
+                    <span class="description">Admin Name</span>
+<?echo"                    <input type=\"text\" class=\"filter-text\" name=\"system_admin_name\" id=\"system_admin_name\" value=\"$item[system_admin_name]\">";
+?>
+                    <label for="name">Mail</label>
+                    <span class="description">Authorized mail id</span>
+<?echo"                    <input type=\"text\" class=\"filter-text\" name=\"system_admin_mail\" id=\"system_admin_mail\" value=\"$item[system_admin_mail]\">";
+?>
+                    <label for="name">Login ID</label>
+                    <span class="description">Set the login ID for your company. It must be the same login name utilized for all authentications</span>
+<?echo"                    <input type=\"text\" class=\"filter-text\" name=\"system_admin_login_id\" id=\"system_admin_login_id\" value=\"$item[system_admin_login_id]\">";
+?>
+                    <label for="name">Password</label>
+                    <span class="description">Set a Password for the Admin!</span>
+<?echo"                    <input type=\"password\" class=\"\" name=\"system_admin_pwd\" id=\"system_admin_pwd\" value=\"untouched\">";
+?>
+                </div>
+
+        </div>
+    </div>
+
+    <div class="controls-wrapper">
+
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="section" value="system">
+        <input type="hidden" name="subsection" value="system_authorization_list">
+        <a>
+            <input type="submit" value="Submit" class="add-btn">
+        </a>
+
+        <a href="http://erambacloud.cloudapp.net/" class="cancel-btn">				Cancel
+        </a>
+    </div>
+
+    </form>
+
+    <br class="clear">
+
+</section>
 </body>
 </html>

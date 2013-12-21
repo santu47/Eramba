@@ -39,6 +39,7 @@ echo "<br>";
 echo "<br>";
 echo "System Version $system_conf[app_version] - licensed under $system_conf[license_number]";
 echo "<br>";
-echo "<a href=\"http://eramba.org\">www.eramba.org</a>";
+echo"<br><br>";
+echo "<a href=\"http://fixnix.in\">{fix}NIX</a>";
 
 ?>

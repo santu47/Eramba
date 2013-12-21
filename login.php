@@ -28,7 +28,7 @@
 			# make a record
 			add_system_records("system","system_authorization_edit",$_SESSION['logged_user_id'],"$user_id","Login","");
 
-			# everytime someone logs in the system, i need to make sure i add all the dashboard statistics
+			# every time someone logs in the system, i need to make sure i add all the dashboard statistics
 			security_services_dashboard_data(NULL);
 			risk_dashboard_data(NULL);
 			asset_dashboard_data(NULL);
@@ -40,14 +40,14 @@
 
 			# update new audits in case we are in a new year
 			new_year_audit_updates();
-	
+
 			header('Location: index.php');
 		} else {
 			# echo "wrong credentials";
 			add_system_records("system","system_authorization","$user_id","$system_users_login","Wrong Login","");
-			$login_error=1;	
-		} 
-	
+			$login_error=1;
+		}
+
 
 	}
 
@@ -64,15 +64,15 @@
 <head>
 	<title>eramba security manager</title>
 	<meta charset="UTF-8" />
-			
+
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
-	      
+
 	<meta name="author" content=""/>
 	<meta name="Copyright" content="" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="Pragma" content="no-cache" />
-	
+
 <?php
 echo "	<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>";
 echo "	<script type=\"text/javascript\" src=\"js/jquery-ui.min.js\"></script>";
@@ -85,22 +85,23 @@ echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 echo "	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/chosen.css\" />";
 ?>
 
+
 	<link rel="stylesheet" href="css/jquery-ui.css" />
 	<script>
 	</script>
-	
-	
+
+
 
 </head>
 <body>
 
 
-<? 
+<?
 
 	if ($login_error) {
-		error_message("Wrong Credentials", "A01");	
+		error_message("Wrong Credentials", "A01");
 	} else {
-		
+
 echo "	<div id=\"centerbox-page-wrapper\" class=\"login\">";
 echo "		<div id=\"centerbox-page-overlay\">";
 echo "		</div>";
@@ -119,7 +120,7 @@ echo "				<div class=\"centerbox-entry\">";
 echo "					<input type=\"submit\" name=\"login-submit\" id=\"submit\" value=\"Sign in\" />";
 echo "				</div>";
 echo "				<div class=\"centerbox-entry\">";
-echo "					<p><a href=\"#\">Forgot password?</a><span> or </span><a href=\"#\">Create New</a></p>";
+echo "					<p><a href=\"#\">Forgot password?</a><span> or </span><a href=\"signup.php\">Create New</a></p>";
 echo "				</div>";
 echo "			</form>";
 echo "		</div>";
