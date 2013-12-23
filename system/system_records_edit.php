@@ -6,18 +6,21 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$system_records_id =isset ($_GET["system_records_id"]) ?  $_GET["system_records_id"]: null;
+	$system_records_id = isset($_GET["system_records_id"]);
 	$author = $_SESSION['logged_user_id'];
 
 	$system_records_lookup_section = $_GET["system_records_lookup_section"]; 
 	$system_records_lookup_subsection = $_GET["system_records_lookup_subsection"]; 
-	$system_records_lookup_item_id = isset($_GET["system_records_lookup_item_id"]) ? $_GET["system_records_lookup_item_id"]: null;
-    $system_records_item = isset($_GET["system_records_item"]) ? $_GET["system_records_item"]: null;
+	$system_records_lookup_item_id = $_GET["system_records_lookup_item_id"];
+	
 	$base_url_list = build_base_url($section,"system_records_list");
 
 	if (is_numeric($system_records_id)) {
 		$system_records_item = lookup_system_records("system_records_id",$system_records_id);
 	}
+    else{
+        $system_records_item=null;
+    }
 
 ?>
 

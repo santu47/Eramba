@@ -6,7 +6,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$bu_id =isset($_GET["bu_id"]);
+	$bu_id = isset($_GET["bu_id"]) ? $_GET["bu_id"]:null;
 	
 	$base_url_list = build_base_url($section,"bu_list");
 	$base_url_edit  = build_base_url($section,"bu_edit");
@@ -38,7 +38,7 @@
 echo "					<form name=\"edit_bu\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Name</label>
-						<span class="description">Register the main business units for your organization. A organizational chart could be useful. Examples for this are: Finance, Legal, Human Resources, Production, Infrastructure, Security, Etc.</span>
+						<span class="description">Register the main business units for your organization. A organizational chart could be usefull. Examples for this are: Finance, Legal, Human Resources, Production, Infrastructure, Security, Etc.</span>
 <? echo "						<input type=\"text\" name=\"bu_name\" class=\"filter-text\" id=\"bu_name\" value=\"$bu_item[bu_name]\"/>";?>
 						
 						<label for="description">Description</label>

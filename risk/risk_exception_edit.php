@@ -7,13 +7,13 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$risk_exception_id = isset($_GET["risk_exception_id"])?$_GET["risk_exception_id"]:null;
+	$risk_exception_id = $_GET["risk_exception_id"];
 	
 	$base_url_list = build_base_url($section,"risk_exception_list");
 
 	if (is_numeric($risk_exception_id)) {
 		$risk_exception_item = lookup_risk_exception("risk_exception_id",$risk_exception_id);
-	}else{$risk_exception_item =null;}
+	}
 
 ?>
 

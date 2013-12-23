@@ -116,6 +116,7 @@ function export_legal_csv() {
 	
 	# open file
 	$export_file = "downloads/legal_export.csv";
+    #$export_file = "legal_export.csv";
 	$handler = fopen($export_file, 'w');
 	
 	fwrite($handler, "legal_id,legal_name,legal_description,legal_disabled\n");

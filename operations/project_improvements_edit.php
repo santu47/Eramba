@@ -7,13 +7,23 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$project_improvements_id = $_GET["project_improvements_id"];
+	$project_improvements_id = isset($_GET["project_improvements_id"]);
+    $project_improvements_achievements_id = isset($_GET["project_improvements_achievements_id"]);
 	
 	$base_url_list = build_base_url($section,"project_improvements_list");
 
 	if (is_numeric($project_improvements_id)) {
 		$project_improvements_item = lookup_project_improvements("project_improvements_id",$project_improvements_id);
 	}
+    else{
+        $project_improvements_item=null;
+    }
+if (is_numeric($project_improvements_achievements_id)) {
+    $project_improvements_item = lookup_project_improvements("project_improvements_achievements_id",$project_improvements_achievements_id);
+}
+else{
+    $project_improvements_item=null;
+}
 
 ?>
 
@@ -36,7 +46,7 @@ echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Project Title</label>
 						<span class="description">Give the project a title, name or code so it's easily identified on the project list menu</span>
-<? echo "<input type=\"text\" class=\"filter-text\" name=\"project_improvements_title\" id=\"project_improvements_title\" value=\"$project_improvements_item[project_improvements_title]\"/>";?>
+<? echo "						<input type=\"text\" class=\"filter-text\" name=\"project_improvements_title\" id=\"project_improvements_title\" value=\"$project_improvements_item[project_improvements_title]\"/>";?>
 						
 	<label for="description">Goal</label>
 	<span class="description">Describe the project Goal, it's roadmap and deliverables.</span>

@@ -12,15 +12,15 @@
 	$action = isset($_GET["action"])?$_GET["action"]:null;
 	
 	# i might need post as well
-	if ($action == "upload_compliance_package") {
+	if ($_POST["action"] == "upload_compliance_package") {
 		$sort = $_POST["sort"];
 		$section = $_POST["section"];
 		$subsection = $_POST["subsection"];
 		$action = $_POST["action"];
-		# this is needed for uploads .. which uses POST
+		# this is needed for uplodas .. which uses POST
 		$tp_id= $_POST["tp_id"];
 	}
-
+	
 	$base_url_upload = build_base_url($section,"compliance_package_upload");
 	$base_url_list = build_base_url($section,"compliance_package_list");
 	$base_url_edit = build_base_url($section,"compliance_package_edit");
@@ -166,8 +166,8 @@ echo "					<li><a href=\"$base_url_upload&action=show_upload_form\">Upload</a></
 
 		foreach($compliance_package_provider_name_list as $compliance_package_provider_name_item) {
 
-			$provider_id = lookup_compliance_package("compliance_package_id",$compliance_package_provider_name_item['compliance_package_tp_id']);
-			$provider_id = lookup_tp("tp_id",$compliance_package_provider_name_item['compliance_package_tp_id']);
+			# $provider_id = lookup_compliance_package("compliance_package_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
+			$provider_id = lookup_tp("tp_id",$compliance_package_provider_name_item[compliance_package_tp_id]);
 
 echo "			<li>";
 echo "				<div class=\"header\">";

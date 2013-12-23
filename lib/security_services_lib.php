@@ -183,7 +183,7 @@ function disable_security_services($item_id) {
 	delete_security_services_catalogue_audit_calendar_join($item_id);
 	$security_services_audit_list = list_security_services_audit(" WHERE security_services_audit_security_service_id = \"$item_id\"");
 	foreach($security_services_audit_list as $security_services_audit_item) {
-		disable_security_services_audit($security_services_audit_item['security_services_audit_id']);
+		disable_security_services_audit($security_services_audit_item[security_services_audit_id]);	
 	}
 
 	return;
@@ -204,11 +204,11 @@ function export_security_services_csv() {
 	foreach($result as $line) {
 
 		$audit_months = array();
-		$status_name = lookup_security_services_status("security_services_status_id", $line['security_services_status']);
+		$status_name = lookup_security_services_status("security_services_status_id", $line[security_services_status]);	
 		$months_list = list_security_services_catalogue_audit_calendar_join(" WHERE security_service_catalogue_id = \"$line[security_services_id]\"");
 		foreach($months_list as $months_item) {
-			$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months_item['security_services_audit_calendar_id']);
-			array_push($audit_months, $month_name['security_services_audit_calendar_name']);
+			$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months_item[security_services_audit_calendar_id]);
+			array_push($audit_months, $month_name[security_services_audit_calendar_name]);
 		}
 		$audit_months_string = implode("-",$audit_months);
 

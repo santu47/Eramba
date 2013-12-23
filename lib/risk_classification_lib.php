@@ -41,9 +41,7 @@ function pre_selected_risk_classification_values($risk_classification_type, $ris
 		foreach($risk_classifications as $risk_classification_item) {
 			if ($classification_item[risk_classification_id] == $risk_classification_item[risk_classification_join_risk_classification_id]) {
 				return $risk_classification_item[risk_classification_join_risk_classification_id];
-
 			}
-            else{return null;}
 		}	
 	}
 }

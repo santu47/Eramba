@@ -7,7 +7,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$tp_id = isset($_GET["tp_id"])?$_GET["tp_id"]:null;
+	$tp_id = $_GET["tp_id"];
 	
 	$base_url_list  = build_base_url($section,"compliance_package_list");
 

@@ -1,7 +1,7 @@
 <?
 
 # WARNING! This is a TEMPLATE
-# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/bu/bu/ - SAMEPLE
+# IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/bu/bu/ - SAMPLE
 
 include_once("mysql_lib.php");
 include_once("asset_bu_join_lib.php");
@@ -111,7 +111,7 @@ function disable_bu($item_id) {
 	$sql = "UPDATE bu_tbl SET bu_disabled=\"1\" WHERE bu_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
 	
-	# I must also remove all asociated processes
+	# I must also remove all associated processes
 	$process_list = list_process(" WHERE bu_id = \"$item_id\"");
 	foreach($process_list as $process_item) {
 		disable_process($process_item[process_id]);	
@@ -148,6 +148,7 @@ function export_bu_csv() {
 	
 	# open file
 	$export_file = "downloads/bu_export.csv";
+    #$export_file = "bu_export.csv";
 	$handler = fopen($export_file, 'w');
 	
 	fwrite($handler, "bu_id,bu_name,bu_description,bu_disabled\n");

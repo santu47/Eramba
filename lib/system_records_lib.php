@@ -18,7 +18,6 @@ function list_system_records($arguments) {
 function add_system_records($system_records_section, $system_records_subsection, $system_records_item_id, $system_records_author, $system_records_action, $system_records_notes) {
 
 	$system_records_time = give_me_date_time();
-
 		
 	$sql = "INSERT INTO
 		system_records_tbl
@@ -106,12 +105,12 @@ function disable_system_records($item_id) {
 	# MUST EDIT
 	$sql = "UPDATE system_records_tbl SET system_records_disabled=\"1\" WHERE system_records_id = \"$item_id\""; 
 	$result = runUpdateQuery($sql);
-	return $result;
+	return;
 }
 
 function export_system_records_csv() {
 
-	# this will dump the table system_records_tbl on CSV format
+	# this will dump the table system_records_tbl on CSV format0
 	$sql = "SELECT * from system_records_tbl";
 	$result = runQuery($sql);
 	
@@ -174,7 +173,7 @@ function get_system_record_cute_name( $subsection ) {
 #	if (  array_key_exists( $subsection, $correct_system_tables ) ) {
 #		$subsection = $correct_system_tables[ $subsection ];
 #	}
-#
+#	
 #	$subsection = $subsection . '_list';
 	
 #	$sql = "SELECT `system_authorization_section_cute_name`, `system_authorization_subsection_cute_name` FROM `system_authorization_tbl` WHERE `system_authorization_subsection_name` = '$subsection'";

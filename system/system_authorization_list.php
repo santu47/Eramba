@@ -1,10 +1,17 @@
 <?
-	include_once("lib/system_users_lib.php");
-	include_once("lib/system_conf_pwd_lib.php");
-	include_once("lib/site_lib.php");
-	include_once("lib/system_records_lib.php");
-	include_once("lib/system_users_lib.php");
-	include_once("lib/system_group_role_lib.php");
+include_once("lib/mysql_lib.php");
+include_once("lib/system_security_lib.php");
+include_once("lib/site_lib.php");
+include_once("lib/security_services_dashboard_lib.php");
+include_once("lib/organization_dashboard_lib.php");
+include_once("lib/risk_dashboard_lib.php");
+include_once("lib/system_records_lib.php");
+include_once("lib/asset_dashboard_lib.php");
+include_once("lib/compliance_dashboard_lib.php");
+include_once("lib/security_operations_dashboard_lib.php");
+include_once("lib/system_dashboard_lib.php");
+include_once("lib/security_services_audit_lib.php");
+include_once("lib/bcm_dashboard_lib.php");
 
 	# general variables - YOU SHOULDNT NEED TO CHANGE THIS
 	$show_id = isset($_GET["show_id"]) ? $_GET["show_id"] : null;
@@ -170,8 +177,8 @@ echo "					<th>Group</a></th>";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 	#echo "$_SESSION[logged_user_id]";
 
-	$logged_user = $_SESSION[$logged_user_id];
-	# i must have a logged user .. if i dont, something is weird and i should stop.
+$logged_user = isset( $_SESSION['logged_user_id'] ) ? true : false;
+	# i must have a logged user .. if i don't, something is weird and i should stop.
 	# if the logged user is admin, i can see all users
 	if ($logged_user == "1") {
 		$system_users_list = list_system_users(" WHERE system_users_disabled = 0");
@@ -197,7 +204,7 @@ echo "						</div>";
 echo "					</td>";
 echo "					<td>$system_users_item[system_users_name]</td>";
 echo "					<td>$system_users_item[system_users_surname]</td>";
-					$group_role_id = lookup_system_group_role("system_group_role_id",$system_users_item['system_users_group_role_id']);
+					$group_role_id = lookup_system_group_role("system_group_role_id",$system_users_item['system_group_role_id']);
 echo "					<td>$group_role_id[system_group_role_name]</td>";
 echo "				</tr>";
 	}

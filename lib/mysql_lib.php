@@ -166,3 +166,6 @@ function dbRowUpdate($table_name, $form_data, $where_clause='')
     // run and return the query result
     return mysql_query($sql);
 }
+
+
+

@@ -3,7 +3,7 @@
 	include_once("lib/general_classification_lib.php");
 	include_once("lib/asset_classification_lib.php");
 	include_once("lib/site_lib.php");
-    #error_reporting(0);
+
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];

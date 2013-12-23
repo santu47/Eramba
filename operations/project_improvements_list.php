@@ -58,7 +58,7 @@
 	$base_url_achievements_list = build_base_url($section,"project_improvements_achievements_list");
 	
 	# local variables - YOU MUST ADJUST THIS! 
-	$project_improvements_id = isset($_GET["project_improvements_id"])? $_GET["project_improvements_achievements_id"]:null;
+	$project_improvements_id = isset($_GET["project_improvements_id"])? $_GET["project_improvements_id"]:null;
 
 	$project_improvements_mitigation_strategy_id = isset($_GET["project_improvements_mitigation_strategy_id"])? $_GET["project_improvements_mitigation_strategy_id"]:null;
 	$security_services_id = isset($_GET["security_services_id"])? $_GET["security_services_audit_id"]:null;
@@ -70,7 +70,7 @@
 	}
 	$project_improvements_residual_score = isset($_GET["project_improvements_residual_score"])? $_GET["project_improvements_residual_score"]:null;
 	if (!is_numeric($project_improvements_residual_score)) {
-		$project_improvements_residual_score = $project_improvements_classification_score;
+		$project_improvements_residual_score = isset($_GET["project_improvements_classification_score"])? $_GET["project_improvements_classification_score"]:null;
 	}
 
 	$security_services_id = isset($_GET["security_services_id"])? $_GET["security_services_id"]:null;
@@ -301,7 +301,7 @@ echo "							<th class=\"center\">Current Budget</th>";
 echo "						</tr>";
 
 echo "						<tr>";
-				$status_item = lookup_project_improvements_status("project_improvements_status_id",$project_improvements_item[project_improvements_status_id]);
+				$status_item = lookup_project_improvements_status("project_improvements_status_id",$project_improvements_item['project_improvements_status_id']);
 echo "							<td><center>$status_item[project_improvements_status_name]</td>";
 echo "							<td><center>$project_improvements_item[project_improvements_start]</td>";
 echo "							<td><center>$project_improvements_item[project_improvements_deadline]</td>";

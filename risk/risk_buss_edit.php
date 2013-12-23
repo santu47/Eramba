@@ -22,14 +22,14 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$risk_id= isset($_GET["risk_id"])?$_GET["risk_id"]:null;
-	$tp_id= isset($_GET["tp_id"])?$_GET["tp_id"]:null;
+	$risk_id= $_GET["risk_id"];
+	$tp_id= $_GET["tp_id"];
 	
 	$base_url_list = build_base_url($section,"risk_buss_list");
 
 	if (is_numeric($risk_id)) {
 		$risk_item = lookup_risk("risk_id",$risk_id);
-	}else{$risk_item =null;}
+	}
 
 ?>
 

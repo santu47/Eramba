@@ -97,7 +97,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=compliance_exception_title\">Compliance Exception Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=compliance_exception_description\">Description</a></th>";
 echo "					<th><center><a href=\"$base_url_list&sort=compliance_exception_author\">Author</a></th>";
-echo "					<th><center><a href=\"$base_url_list&sort=compliance_exception_expiration\">Expiration</a></th>";
+echo "					<th><center><a href=\"$base_url&sort=compliance_exception_expiration\">Expiration</a></th>";
 ?>
 				</tr>
 			</thead>

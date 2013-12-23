@@ -7,13 +7,13 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$compliance_exception_id = isset($_GET["compliance_exception_id"])?$_GET["compliance_exception_id"]:null;
+	$compliance_exception_id = $_GET["compliance_exception_id"];
 	
 	$base_url_list = build_base_url($section,"compliance_exception_list");
 
 	if (is_numeric($compliance_exception_id)) {
 		$compliance_exception_item = lookup_compliance_exception("compliance_exception_id",$compliance_exception_id);
-	}else{$compliance_exception_item =null;}
+	}
 
 ?>
 
@@ -31,15 +31,16 @@
 			
 			<div class="tab-content">
 				<div class="tab" id="tab1">
-<?echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$base_url_list\">";?>
+<?
+echo "					<form name=\"compliance_exception_edit\" method=\"GET\" action=\"$base_url_list\">";
+?>
 						<label for="applicable">Compliance Exception Title</label>
 						<span class="description">Provide a descriptive title. Example: Mac-OS Antivirus</span>
 <? echo "					<input class=\"filter-text\" type=\"text\" name=\"compliance_exception_title\" id=\"\" value=\"$compliance_exception_item[compliance_exception_title]\">"; ?>
-
+						
 						<label for="description">Description</label>
 						<span class="description">A good description should include what the compliance is (threat, vulnerablities, impact, etc), the options which where considered and discarded, etc.</span>
-<? echo "				<input class=\"filter-text\" type=\"text\" name=\"compliance_exception_description\" id=\"\" value=\"$compliance_exception_item[compliance_exception_description]\">"; ?>
-
+<? echo "						<textarea class=\"filter-text\" name=\"compliance_exception_description\">$compliance_exception_item[compliance_exception_description]</textarea>";?>
 
 						<label for="name">Author</label>
 						<span class="description">The identity of the person who will approve this Compliance Exception.</span>

@@ -6,7 +6,7 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$legal_id = isset($_GET["legal_id"]) ? $_GET["legal_id"]:null;
+	$legal_id = isset($_GET["legal_id"]);
 	
 	$base_url_list = build_base_url($section,"legal_list");
 	$base_url_edit  = build_base_url($section,"legal_edit");

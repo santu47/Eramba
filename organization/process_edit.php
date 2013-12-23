@@ -6,18 +6,17 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$process_id = isset($_GET["process_id"]);
+	$process_id = $_GET["process_id"];
 	$bu_id = $_GET["bu_id"];
 	
 	$base_url_list = build_base_url($section,"bu_list");
 
 	if (is_numeric($process_id)) {
 		$process_item = lookup_process("process_id",$process_id);
-    }
+	}
     else{
-            $process_item=null;
+        $process_item=null;
     }
-
 
 ?>
 

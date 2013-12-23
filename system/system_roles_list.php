@@ -165,7 +165,7 @@ echo "					<td>$system_group_role_item[system_group_role_description]</td>";
 
 echo "					<td>";
 	foreach($pre_selected_system_group_role_read_access as $pre_selected_auth_item) {
-		$auth_name = lookup_system_authorization("system_authorization_id",$pre_selected_auth_item[system_authorization_group_auth_id]);
+		$auth_name = lookup_system_authorization("system_authorization_id",$pre_selected_auth_item['system_authorization_group_auth_id']);
 		echo "- $auth_name[system_authorization_section_cute_name] / $auth_name[system_authorization_subsection_cute_name] - ($auth_name[system_authorization_action_type])<br>";
 	}
 echo "					</td>";

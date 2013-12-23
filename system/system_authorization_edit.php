@@ -9,13 +9,16 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$system_users_id = isset( $_GET["system_users_id"] ) ? $_GET["system_users_id"] : 1;
+	$system_users_id = isset( $_GET["system_users_id"] ) ? $_GET["system_users_id"] : $_GET["system_authorization_id"];
 	
 	$base_url_list = build_base_url($section,"system_authorization_list");
 
 	if (is_numeric($system_users_id)) {
 		$item = lookup_system_users("system_users_id",$system_users_id);
 	}
+    else{
+        $item=null;
+    }
 
 ?>
 
@@ -52,8 +55,8 @@ echo "					<form name=\"system_group_role_edit\" method=\"GET\" action=\"$base_u
 <? echo "						<input type=\"password\" class=\"\" name=\"system_conf_admin_pwd\" id=\"system_conf_admin_pwd\" value=\"untouched\"/>";?>
 
 <?
-						
-if ($item['system_users_id'] != "1") {
+error_reporting(0);
+if ($item[system_users_id] != "1") { 
 
 	echo "	<label for=\"legalType\">Group Role</label>";
 	echo "	<span class=\"description\">Select the access Group Role this user requires</span>";

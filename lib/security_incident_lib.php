@@ -4,6 +4,7 @@
 # IF YOU WANT TO USE, YOU MUST RENAME FUNCTIONS!! :s/security_incident/security_incident/ - SAMEPLE
 
 include_once("mysql_lib.php");
+error_reporting(0);
 
 function list_security_incident($arguments) {
 	# MUST EDIT
@@ -63,7 +64,7 @@ function lookup_security_incident($search_parameter, $item_id) {
 	}
 
 	# MUST EDIT
-	$sql = "SELECT * from security_incident_tbl WHERE $search_parameter = \"$item_id\""; 
+	$sql = "SELECT * from security_incident_tbl WHERE $search_parameter = \"$item_id\"";
 	$result = runSmallQuery($sql);
 	return $result;
 }
@@ -87,31 +88,31 @@ function list_drop_menu_security_incident($pre_selected_items='', $order_clause=
 			foreach($pre_selected_items as $preselected) {
 				# MUST EDIT
 				if ($results_item[security_incident_id] == $preselected) {
-					echo "<option selected=\"selected\" value=\"$results_item[security_incident_id]\">$results_item[security_incident_name]</option>\n";
+					echo "<option selected=\"selected\" value=\"$results_item[security_incident_id]\">$results_item[security_incident_title]</option>\n";
 					$match = 1;
 				} 
 			}
 
 			# MUST EDIT
 			if (!$match) { 
-				echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_name]</option>\n"; 
+				echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_title]</option>\n";
 			}
 
 		} elseif ($pre_selected_items) {
 			$match = NULL;
 			# MUST EDIT
 			if ($results_item[security_incident_id] == $pre_selected_items) {
-				echo "<option selected=\"selected\" value=\"$results_item[security_incident_id]\">$results_item[security_incident_name]</option>\n";
+				echo "<option selected=\"selected\" value=\"$results_item[security_incident_id]\">$results_item[security_incident_title]</option>\n";
 				$match = 1;
 			} 
 
 			# MUST EDIT
 			if (!$match) { 
-				echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_name]</option>\n"; 
+				echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_title]</option>\n";
 			}
 		} else {
 			# MUST EDIT
-			echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_name]</option>\n"; 
+			echo "<option value=\"$results_item[security_incident_id]\">$results_item[security_incident_title]</option>\n";
 		}
 	}
 
@@ -122,7 +123,7 @@ function disable_security_incident($item_id) {
 		return;
 	}
 	# MUST EDIT
-	$sql = "UPDATE security_incident_tbl SET security_incident_disabled=\"1\" WHERE security_incident_id = \"$item_id\""; 
+	$sql = "UPDATE security_incident_tbl SET security_incident_disabled=\"1\" WHERE security_incident_id = \"$item_id\"";
 	$result = runUpdateQuery($sql);
 	return;
 }

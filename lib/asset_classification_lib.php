@@ -5,7 +5,6 @@
 
 include_once("mysql_lib.php");
 include_once("configuration.inc");
-#error_reporting(0);
 
 function pre_selected_asset_classification_values($asset_classification_type, $asset_id) {
 

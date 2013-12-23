@@ -7,13 +7,13 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-    $compliance_audit_id = isset($_GET["compliance_audit_id"])?$_GET["compliance_audit_id"]:null;
+	$compliance_audit_id = $_GET["compliance_audit_id"];
 	
 	$base_url_list = build_base_url($section,"compliance_audit_list");
 
 	if (is_numeric($compliance_audit_id)) {
 		$compliance_audit_item = lookup_compliance_audit("compliance_audit_id",$compliance_audit_id);
-	}else{$compliance_audit_item =null;}
+	}
 
 ?>
 

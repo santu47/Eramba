@@ -130,7 +130,7 @@ echo "					<th><a href=\"$base_url_list&sort=tp_description\">Description</a></t
 
 	foreach($tp_list as $tp_item) {
 
-	$tp_type_name = lookup_tp_type("tp_type_id",$tp_item['tp_type_id']);
+	$tp_type_name = lookup_tp_type("tp_type_id",$tp_item[tp_type_id]);
 
 echo "				<tr class=\"even\">";
 echo "					<td class=\"action-cell\">";

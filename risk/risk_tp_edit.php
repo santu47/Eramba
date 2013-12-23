@@ -24,14 +24,14 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$risk_id= isset( $_GET["risk_id"] ) ? $_GET["risk_id"] : null;
-	$tp_id= isset($_GET["tp_id"])?$_GET["tp_id"]:null;
+	$risk_id= isset( $_GET["risk_id"] ) ? $_GET["risk_id"] : $_GET["tp_risk_id"];
+	$tp_id= $_GET["tp_id"];
 	
 	$base_url_list = build_base_url($section,"risk_tp_list");
 
 	if (is_numeric($risk_id)) {
 		$risk_item = lookup_risk("risk_id",$risk_id);
-	}else{$risk_item =null; }
+	}
 
 ?>
 
@@ -43,7 +43,7 @@
 			<ul class="tabs">
 				<li class="first active">
 <?
-#echo "					<a href=\"$base_url&action=edit&risk_id=$risk_item[risk_id]\">General</a>";
+echo "					<a href=\"$base_url&action=edit&risk_id=$risk_item[risk_id]\">General</a>";
 ?>
 					<a href="tab1">General</a>
 					<span class="right"></span>

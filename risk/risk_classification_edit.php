@@ -7,14 +7,13 @@
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$risk_classification_id = isset($_GET["risk_classification_id"])?$_GET["risk_classification_id"]:null;
+	$risk_classification_id = $_GET["risk_classification_id"];
 	
 	$base_url_list = build_base_url($section,"risk_classification_list");
 
 	if (is_numeric($risk_classification_id)) {
 		$risk_classification_item = lookup_risk_classification("risk_classification_id",$risk_classification_id);
 	}
-else{$risk_classification_item=null;}
 
 ?>
 

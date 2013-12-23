@@ -1,4 +1,4 @@
-<?
+ <?
 
 	include_once("lib/security_incident_lib.php");
 	include_once("lib/security_incident_classification_lib.php");
@@ -41,7 +41,7 @@
 echo "					<form name=\"edit\" method=\"GET\" action=\"$base_url_list\">";
 ?>
 						<label for="name">Security Incident Title</label>
-						<span class="description">Give the Securty Incident a title, name or code so it's easily identified on the list list menu</span>
+						<span class="description">Give the Security Incident a title, name or code so it's easily identified on the list list menu</span>
 <? echo "						<input type=\"text\" class=\"filter-text\" name=\"security_incident_title\" id=\"security_incident_title\" value=\"$security_incident_item[security_incident_title]\"/>";?>
 						
 	<label for="description">Incident Description</label>

@@ -81,7 +81,7 @@
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
-        );
+		);	
 		update_security_services($security_services_update,$security_services_id);
 		add_system_records("security_services","security_catalogue_edit","$security_services_id",$_SESSION['logged_user_id'],"Update","");
 	
@@ -140,7 +140,7 @@
 			'security_services_cost_capex' => $security_services_cost_capex,
 			'security_services_cost_operational_resource' => $security_services_cost_operational_resource,
 			'security_services_cost_disabled' => $security_services_cost_disabled
-		);
+		);	
 		$security_services_id = add_security_services($security_services_update);
 		# when inserting security catalogues i need to look at the asociated reviews (audit)
 		# add_security_services_audit_v2($security_service_id);	
@@ -269,21 +269,21 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 	foreach($security_services_list as $security_services_item) {
 	
 	# i use this to check if the control has audit failures and put it as a warning
-	if ( check_service_last_audit_result($security_services_item['security_services_id']) ) {
+	if ( check_service_last_audit_result($security_services_item[security_services_id]) ) {
 		$warning_audit = "";
 	} else {
 		$warning_audit = " - (Warning: Audit Issues)";
 	}
 
 	# i need to check if the service is actually being used or not
-	if ( service_in_use($security_services_item['security_services_id']) ) {
+	if ( service_in_use($security_services_item[security_services_id]) ) {
 		$warning_not_in_use= " - (Warning: Control not in use!)";
 	} else {
 		$warning_not_in_use= "";
 	} 
 
-	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item['security_services_status']);
-	$classification_name = lookup_security_services_classification("security_services_classification_id", $security_services_item['security_services_classification_id']);
+	$status_name = lookup_security_services_status("security_services_status_id", $security_services_item[security_services_status]);	
+	$classification_name = lookup_security_services_classification("security_services_classification_id", $security_services_item[security_services_classification_id]);	
 
 echo "			<li>";
 echo "				<div class=\"header\">";
@@ -338,13 +338,13 @@ echo "								<td class=\"left\">$security_services_item[security_services_audit
 
 echo "								<td class=\"center\">";
 	foreach($months_list as $months) {
-		$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months['security_services_audit_calendar_id']);
+		$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$months[security_services_audit_calendar_id]); 
 		echo "$month_name[security_services_audit_calendar_name] "; 
 	}
 
 echo "</td>";
 	#if ( check_service_last_maintenance_result($security_services_item[security_services_id]) ) {
-	if ( check_service_last_audit_result($security_services_item['security_services_id']) ) {
+	if ( check_service_last_audit_result($security_services_item[security_services_id]) ) {
 		$audit_result = "<a href=\"$base_url_audit_report_list&service_id=$security_services_item[security_services_id]\">Ok</a>";
 	} else {
 		$audit_result = "<a href=\"$base_url_audit_report_list&service_id=$security_services_item[security_services_id]\">Not Ok</a>";
@@ -365,7 +365,7 @@ echo "							</tr>";
 echo "							<tr>";
 echo "								<td class=\"center\">";
 
-		echo "".substr($security_services_item['security_services_regular_maintenance'],0,100)."...";
+		echo "".substr($security_services_item[security_services_regular_maintenance],0,100)."...";
 
 echo "</td>";
 
@@ -374,13 +374,13 @@ echo "								<td class=\"center\">";
 $maintenance_months_list = list_security_services_catalogue_maintenance_calendar_join(" WHERE security_service_catalogue_id = \"$security_services_item[security_services_id]\"");	
 
 foreach($maintenance_months_list as $maintenance_months_item) {
-	$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$maintenance_months_item['security_services_maintenance_calendar_id']);
+	$month_name = lookup_security_services_audit_calendar("security_services_audit_calendar_id",$maintenance_months_item[security_services_maintenance_calendar_id]); 
 	echo "$month_name[security_services_audit_calendar_name] "; 
 }
 
 echo "</td>";
 
-		if ( check_service_last_maintenance_result($security_services_item['security_services_id']) ) {
+		if ( check_service_last_maintenance_result($security_services_item[security_services_id]) ) {
 			$audit_result = "<a href=\"$base_url_maintenance_report_list&service_id=$security_services_item[security_services_id]\">Ok</a>";
 		} else {
 			$audit_result = "<a href=\"$base_url_maintenance_report_list&service_id=$security_services_item[security_services_id]\">Not Ok</a>";

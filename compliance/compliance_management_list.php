@@ -2,10 +2,9 @@
 
 	include_once("lib/site_lib.php");
 	include_once("lib/compliance_package_lib.php");
-    include_once("lib/tp_lib.php");
 
-	$section = isset($_GET["section"])?$_GET["section"]:null;
-	$subsection = isset($_GET["subsection"])?$_GET["subsection"]:null;
+	$section = $_GET["section"];
+	$subsection = $_GET["subsection"];
 	$action = isset($_GET["action"])?$_GET["action"]:null;
 	
 	$base_url_step_two = build_base_url($section,"compliance_management_step_two");
@@ -26,16 +25,16 @@
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 echo "					<th><a class=\"asc\">Compliance Package</th>";
-echo "					<th><a class=\"asc\">Strategy Mitigate</th>";
-echo "					<th><a class=\"asc\">Strategy NA</th>";
-echo "					<th><a class=\"asc\">Missing Controls</th>";
-echo "					<th><a class=\"asc\">Failed Controls</th>";
-echo "					<th><a class=\"asc\">Comp. On-Going</th>";
-echo "					<th><a class=\"asc\">Compliant</th>";
-echo "					<th><a class=\"asc\">Non-Compliant</th>";
-echo "					<th><a class=\"asc\">Comp. N/A</th>";
-echo "					<th><a class=\"asc\">Incident</th>";
-echo "					<th><a class=\"asc\">Open Audit Items</th>";
+echo "					<th>% Strategy Mitigate</th>";
+echo "					<th>% Strategy NA</th>";
+echo "					<th>% Missing Controls</th>";
+echo "					<th>% Failed Controls</th>";
+echo "					<th>% Comp. On-Going</th>";
+echo "					<th>% Compliant</th>";
+echo "					<th>% Non-Compliant</th>";
+echo "					<th>% Comp. N/A</th>";
+echo "					<th># Incident</th>";
+echo "					<th># Open Audit Items</th>";
 ?>
 				</tr>
 			</thead>
@@ -50,14 +49,14 @@ $list_compliance_package = list_compliance_package_unique();
 foreach($list_compliance_package as $list_compliance_package_item) { 
 
 
-	$package_name = lookup_tp("tp_id", $list_compliance_package_item['compliance_package_tp_id']);
-	$no_controls = ( compliance_rate_missing_controls($list_compliance_package_item['compliance_package_tp_id']) * 100 );
-	$failed_controls = ( compliance_rate_failed_controls($list_compliance_package_item['compliance_package_tp_id']) * 100 );
-	$strategy_response = compliance_rate_strategy_mitigate($list_compliance_package_item['compliance_package_tp_id']);
+	$package_name = lookup_tp("tp_id", $list_compliance_package_item[compliance_package_tp_id]); 
+	$no_controls = ( compliance_rate_missing_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
+	$failed_controls = ( compliance_rate_failed_controls($list_compliance_package_item[compliance_package_tp_id]) * 100 );
+	$strategy_response = compliance_rate_strategy_mitigate($list_compliance_package_item[compliance_package_tp_id]);
 	$incident = list_security_incident(" WHERE security_incident_disabled = \"0\" and security_incident_tp_id = \"$package_name[tp_id]\"");
 
 	$finding_counter=0;
-	$audit  = lookup_compliance_audit("compliance_audit_package_id",$list_compliance_package_item['compliance_package_tp_id']);
+	$audit  = lookup_compliance_audit("compliance_audit_package_id",$list_compliance_package_item[compliance_package_tp_id]);
 	if (count($audit)>0) {
 	foreach($audit as $audit_item) {
 		$finding = list_compliance_finding(" WHERE compliance_audit_id = \"$audit_item[compliance_audit_package_id]\" AND compliance_finding_disabled = \"0\" AND compliance_finding_status = \"1\"");
@@ -76,7 +75,7 @@ echo "						<div class=\"cell-actions\">";
 echo "							<a href=\"$base_url_step_two&action=start_compliance_management&tp_id=$package_name[tp_id]\">Analyse</a> ";
 echo "						</div>";
 echo "					</td>";
-echo "					<td>".round(substr($strategy_response[0]*100,2))." %</td>";
+echo "					<td>".round($strategy_response[0]*100,2)." %</td>";
 echo "					<td>".round($strategy_response[1]*100,2)." %</td>";
 echo "					<td>$no_controls %</td>";
 echo "					<td>$failed_controls %</td>";

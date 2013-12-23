@@ -10,7 +10,7 @@
 	include_once("lib/bcm_plans_catalogue_audit_calendar_join_lib.php");
 
 	$section = $_GET["section"];
-	$subsection = $_GET["subsection"];
+	$subsection = $_GET"subsection"];
 	$action = $_GET["action"];
 	$bcm_plans_id = isset($_GET["bcm_plans_id"])? $_GET["bcm_plans_id"]:null;
 	
@@ -19,7 +19,6 @@
 	if (is_numeric($bcm_plans_id)) {
 		$plan_item = lookup_bcm_plans("bcm_plans_id",$bcm_plans_id);
 	}
-else{$plan_item=null;}
 
 ?>
 

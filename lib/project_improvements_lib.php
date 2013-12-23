@@ -5,6 +5,7 @@
 
 include_once("mysql_lib.php");
 include_once("project_improvements_expenses_lib.php");
+global $project_improvements_origin;
 
 function list_project_improvements($arguments) {
 	# MUST EDIT
@@ -161,14 +162,14 @@ function export_project_improvements_csv() {
 	$export_file = "downloads/project_improvements_export.csv";
 	$handler = fopen($export_file, 'w');
 	
-	fwrite($handler, "project_improvements_id,project_improvements_title,project_improvements_goal,project_improvements_start,project_improvements_deadline,project_improvements_status_name,project_improvements_owner,project_improvements_origin,planned_budget,current_budget\n");
+	fwrite($handler, "project_improvements_id,project_improvements_title,project_improvements_goal,project_improvements_start,project_improvements_deadline,project_improvements_status_name,project_improvements_owner,planned_budget,current_budget\n");
 
 	foreach($result as $line) {
 
 	
-		$project_improvements_status = lookup_project_improvements_status("project_improvements_status_id", $line[project_improvements_status_id]);
+		$project_improvements_status = lookup_project_improvements_status("project_improvements_status_id", $line['project_improvements_status_id']);
 		
-		fwrite($handler,"$line[project_improvements_id],$line[project_improvements_title],$line[project_improvements_goal],$line[project_improvements_start],$line[project_improvements_deadline],$project_improvements_status[project_improvements_status_name],$line[project_improvements_owner_id],$project_improvements_origin,$line[project_improvements_plan_budget],$line[project_improvements_current_budget]\n");
+		fwrite($handler,"$line[project_improvements_id],$line[project_improvements_title],$line[project_improvements_goal],$line[project_improvements_start],$line[project_improvements_deadline],$project_improvements_status[project_improvements_status_name],$line[project_improvements_owner_id],$line[project_improvements_plan_budget],$line[project_improvements_current_budget]\n");
 		
 		# find all the expenses for this project
 		$list_of_expenses = list_project_improvements_expenses(" WHERE project_improvements_expenses_project_id = \"$line[project_improvements_id]\""); 

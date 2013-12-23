@@ -4,17 +4,21 @@
 	include_once("lib/system_authorization_lib.php");
 	include_once("lib/system_authorization_group_role_join_lib.php");
 	include_once("lib/site_lib.php");
+    error_reporting(0);
 
 	$section = $_GET["section"];
 	$subsection = $_GET["subsection"];
 	$action = $_GET["action"];
-	$system_group_role_id = isset( $_GET["system_group_role_id"] ) ? $_GET["system_group_role_id"] : 1;
+	$system_group_role_id = isset( $_GET["system_group_role_id"] ) ? $_GET["system_group_role_id"] : $_GET["system_roles_id"];
 	
 	$base_url_list = build_base_url($section,"system_roles_list");
 
 	if (is_numeric($system_group_role_id)) {
 		$system_group_role_item = lookup_system_group_role("system_group_role_id",$system_group_role_id);
 	}
+    else{
+        $system_group_role_item=null;
+    }
 
 ?>
 

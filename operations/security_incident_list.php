@@ -134,7 +134,10 @@ echo "			<a href=\"$base_url_edit&action=edit\" class=\"add-btn\">";
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
 if ($action == "csv") {
 	echo '<li><a href="' . $base_url_list . '&download_export=security_incident_export">Download</a></li>';
-} else { 
+} else {
+#echo "					<li><a href=\"$base_url_list&action=list&sort=1\">Reported</a></li>";
+#echo "					<li><a href=\"$base_url_list&action=list&sort=2\">Ongoing</a></li>";
+#echo "					<li><a href=\"$base_url_list&action=list&sort=3\">Closed</a></li>";
 echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 }
 ?>
@@ -148,7 +151,7 @@ echo "					<li><a href=\"$base_url_list&action=csv\">Export All</a></li>";
 				<tr>
 <?
 # -------- TEMPLATE! YOU MUST ADJUST THIS ------------
-echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_name\">Incident Title</a></th>";
+echo "					<th><a class=\"asc\" href=\"$base_url_list&sort=security_incident_title\">Incident Title</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_tp_id\">Third Party</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_reporter_id\">Reporter</a></th>";
 echo "					<th><a href=\"$base_url_list&sort=security_incident_victim_id\">Affected</a></th>";
@@ -169,7 +172,7 @@ echo "					<th><a href=\"$base_url_list&sort=security_incident_compromised_asset
 	if ($show_id) {
 		$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 AND security_incident_id = $show_id");
 	} else {
-		if ($sort == "security_incident_name" OR $sort == "security_incident_tp_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_classification_id" OR $sort == "security_incident_status_id" OR $sort == "security_incident_open_date" OR $sort == "security_incident_closure_date" OR $sort == "security_incident_owner_id" OR $sort == "security_incident_compromised_asset_id") {
+		if ($sort == "security_incident_title" OR $sort == "security_incident_tp_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_victim_id" OR $sort == "security_incident_classification_id" OR $sort == "security_incident_status_id" OR $sort == "security_incident_open_date" OR $sort == "security_incident_closure_date" OR $sort == "security_incident_owner_id" OR $sort == "security_incident_compromised_asset_id") {
 			$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 ORDER by $sort");
 		} else {
 			$security_incident_list = list_security_incident(" WHERE security_incident_disabled = 0 ORDER by security_incident_open_date");

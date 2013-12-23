@@ -17,6 +17,9 @@
 	if (is_numeric($project_improvements_id)) {
 		$project_improvements_item = lookup_project_improvements("project_improvements_id",$project_improvements_id);
 	}
+    else{
+        $project_improvements_item=null;
+    }
 
 	if (is_numeric($project_improvements_achievements_id)) {
 		$project_expenses_item = lookup_project_improvements_achievements("project_improvements_achievements_id",$project_improvements_achievements_id);
