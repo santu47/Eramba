@@ -1,4 +1,4 @@
 risk_classification_id,risk_classification_name,risk_classification_description,risk_classification_type, risk_classification_value, risk_classification_disabled
-1,,,, 1,0
+1,,,, 1,1
 2,Low,the risk worth is higher than 50lk,Testing, 5,0
 3,High,the risk worth 10k,Testing1, 3,0
